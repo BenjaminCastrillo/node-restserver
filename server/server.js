@@ -1,44 +1,39 @@
 require ('./config/config');
 
 const express = require('express');
+const mongoose = require('mongoose');
+const morgan = require('morgan');
+
 const app = express();
 const bodyParser = require('body-parser');
 
-// parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
- 
-// parse application/json
-app.use(bodyParser.json())
- 
-app.get('/usuario', function (req, res) {
-  res.json('get usuario')
-})
-app.post('/usuario', function (req, res) {
-  let body = req.body;
+// Middlewares
 
-  if (body.nombre===undefined){
-    res.status(400).json({
-      ok:false,
-      mensaje:'el nombre es necesario'
-    })
-  }
-else{
-    res.json({
-    persona:body
-  })
-}
-})
-app.put('/usuario/:id', function (req, res) {
-  let id= req.params.id;
-  res.json({
-    id
-  })
-})
-app.delete('/usuario', function (req, res) {
-  res.json('delete usuario')
-})
- 
-app.listen(process.env.PORT, ()=>{
+app.use(bodyParser.json()); // parse application/json
+app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded 
+app.use(morgan('combined'));
 
-  console.log('escuchando en el puerto', process.env.PORT);
+// importamos las rutas del usuario del archivo de rutas
+app.use(require('./routes/usuario'));
+
+// configuracion de la conexion a BBDD
+const optionsBBDDConnections = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+};
+
+
+//conexion a mongo
+
+// mongoose.connect('mongodb://localhost:27017/cafe',optionsBBDDConnections)
+mongoose.connect(process.env.URLDB,optionsBBDDConnections)
+  .then (db => console.log('La DDBB esta conectada'))
+  .catch (err => console.log(err));
+
+
+// arrancar servidor HTTP
+app.listen(process.env.PORT, ()=>{      
+   console.log('escuchando en el puerto', process.env.PORT);
 });
