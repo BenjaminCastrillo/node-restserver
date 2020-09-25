@@ -22,7 +22,7 @@ app.get('/usuario', function (req, res) {
   let limite =req.query.limite || 5;
   limite = Number (limite);
 
-  Usuario.find({estado:false},'nombre email role estado google')
+  Usuario.find({estado:true},'nombre email role estado google')
         .skip(desde)
         .limit(limite)
         .exec ((err,usuarioDB)=>{
