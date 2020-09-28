@@ -17,6 +17,7 @@ if (process.env.NODE_ENV==='dev'){
 }
 else{
 
-    urlDB='mongodb+srv://Benjamin:FCxu72hdKS78C3f7@cluster0.zkk3k.mongodb.net/cafe'
+   // urlDB='mongodb+srv://Benjamin:FCxu72hdKS78C3f7@cluster0.zkk3k.mongodb.net/cafe'
+    urlDB=process.env.MONGO_URI
 }
 process.env.URLDB=urlDB;
