@@ -13,8 +13,8 @@ app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded 
 app.use(morgan('combined'));
 
-// importamos las rutas del usuario del archivo de rutas
-app.use(require('./routes/usuario'));
+// importamos las rutas desde el indice global de  rutas
+app.use(require('./routes/index'));
 
 // configuracion de la conexion a BBDD
 const optionsBBDDConnections = {

@@ -62,5 +62,5 @@ usuarioSchema.methods.toJSON = function(){
 
 usuarioSchema.plugin(uniqueValidator,{message:'{PATH} debe ser único'})
 
-// al exportar el esquema le damos el nombre que 
+// al exportar el esquema le damos el nombre que queramos
 module.exports=mongoose.model('usuario',usuarioSchema);
