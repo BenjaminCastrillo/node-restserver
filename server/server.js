@@ -6,12 +6,17 @@ const morgan = require('morgan');
 
 const app = express();
 const bodyParser = require('body-parser');
+const path = require('path');
 
 // Middlewares
 
 app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.urlencoded({ extended: false })); // parse application/x-www-form-urlencoded 
 app.use(morgan('combined'));
+
+// Habilitar la carpeta public para que sea accesible
+
+app.use(express.static(path.resolve(__dirname,'../public')));
 
 // importamos las rutas desde el indice global de  rutas
 app.use(require('./routes/index'));

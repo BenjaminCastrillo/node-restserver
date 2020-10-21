@@ -63,7 +63,7 @@ app.post('/usuario', verificaToken, (req, res)=> {
 /*  save es un metodo de mongoose que hereda usuario y permite salvar en la bbdd. Tiene como 
     parámetro una callback
     usuarioDB es al respuesta de lo que se grabo en Mongo
-    si se produce un error este estara en err sino lo trabado en usuarioDB
+    si se produce un error este estara en err sino lo grabado en usuarioDB
 */
   usuario.save((err,usuarioDB)=>{
 
@@ -75,7 +75,6 @@ app.post('/usuario', verificaToken, (req, res)=> {
     }
     // Ponemos el valor de password a null para que no se vea el valoer en la repuesta
     // usuarioDB.password=null;
-
     res.json({
       ok:true,
       usuario:usuarioDB
@@ -84,6 +83,7 @@ app.post('/usuario', verificaToken, (req, res)=> {
 
 });
 
+// para utilziar dos middleaware utilizamos un array
 app.put('/usuario/:id', [verificaToken,verificaAdmin_Role], (req, res)=> {
     
   let id= req.params.id;
