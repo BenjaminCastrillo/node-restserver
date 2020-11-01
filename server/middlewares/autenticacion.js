@@ -8,6 +8,8 @@ let verificaToken=(req,res,next)=>{
 
     // Parea verificar el token recibido 
     // en decoded esta el token decodificado decoded.usuario
+ //   console.log(token);
+
     jwt.verify(token,process.env.SEED_AUTHENTICATION,(err, decoded)=>{
         if (err){
             return res.status(401).json({

@@ -10,7 +10,8 @@ process.env.NODE_ENV= process.env.NODE_ENV || 'dev';
 
 //* Fecha vendimiento del token
 
-process.env.CADUCIDAD_TOKEN= 60*60*24*120;
+//process.env.CADUCIDAD_TOKEN= 60*60*24*120;
+process.env.CADUCIDAD_TOKEN= '48h';
 
 //* Semilla de autenticación
 
